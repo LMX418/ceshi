@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>html5笔记</title>
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li>1、pc端和移动端公用一套项目（同一个地址），我们保持良好的展示性，例如：猎豹浏览器、华为官网等简单的展示网站</li>
+        <li>2、pc端和移动端用的是不同的项目，例如京东、淘宝等<br>
+            pc端固定布局即可<br>
+            移动端需要考虑响应式开发<br>
+            1)放在浏览器运行
+            2）放在第三平台运行（微信）
+            3）放在自己公司的native-app中运行
+            ……<br>
+            >手机常用的尺寸<br>
+            >[苹果]<br>
+            >iphone5及以前:320px<br>
+            >iphone4:320*480<br>
+            >iphone5:320*568<br>
+            >iphone6:375px<br>
+            >iphone6plus:414px<br>
+            >安卓<br>
+            >320、360、480、540、640……<br>
+            >做h5页面之前，需要从设计师手里拿ui设计图（psd格式或者sketch设计稿）
+            >设计师提供的专门做移动端项目的设计稿尺寸<br>
+            >640*960<br>
+            >640*1136<br>
+            >750*1334……<br>
+            >设备像素密度比<br>
+        </li>
+        <li>rem响应式布局开发</li>
+        <li>px是固定单位 rem是相对单位（相对于页面根元素HTML字体大小设定单位）</li>
+        <li>html{font-size:100px;方便后期把px转换成rem时候的计算}</li>
+        <li>项目中如何利用rem的特性实现响应式开发</li>
+        <li>1.严格按照设计稿中提供的尺寸进行样式编写，例如：设计稿750*1336
+        的，设计稿中有一个300*150的图片，我们布局依然按照300*150布局
+        </li>
+        <li>2.我们在编写样式的时候，不要使用px单位，所有的单位都统一换算为rem</li>
+        <li>3.以上完成后，在750的手机上是没有问题的，但是在375的手机上有问题了（页面太大）
+        此时我们需要页面中所有的样式，都整体缩小，才能达到适配的目的
+            此时只需要把HTML的字体大小修改，那么之前所有的rem为单位的样式会跟着重新计算
+        </li>
+        <li>750设计稿：1rem=110px</li>
+        <li>375的手机:375/750*100就是最新的html的字体大小，也是最新rem和px的换算比例</li>
+        <li>当前设备宽度/设计稿宽度*100=当前手机的rem和px的换算比例【html的字体大小】</li>
+        <li>--rem等比缩放响应式布局--（细节处理会用到flex或者@media）pc端不支持rem</li>
+        <li>移动端常用的类库zepto</li>
+        <li>.一个小型的，专门针对移动端开发的js类库，它的开发原理以及使用方法非常接近jq,所以很多人把它称之为小型的jq</li>
+        <li>zepto vs jquery</li>
+        <li>1、zepto不支持ie6-8,有一些方法ie高版本也不支持，是专门为安卓和ios系统所在的移动端准备的</li>
+        <li>jquery的第一代版本兼容所有浏览器（最常用的版本），第二代和第三代不在兼容ie低版本浏览器</li>
+        <li>2、zepto只实现了部分jq中常用的方法，有一些方法在zepto中无法使用，例如：jq支持animate、hide、show、slideDown、slideUp这些动画
+        但zepto中只有animate,其他动画不支持
+        </li>
+        <li>
+            zepto类库的体积比jq小很多，它属于轻量级js类库，更适合移动端的使用
+        </li>
+        <li>3、zepto提供了移动端专用的事件操作方法，而jq中没有</li>
+        <li>tab：点击</li>
+        <li>singleTab：单击</li>
+        <li>doubleTab：双击</li>
+        <li>longTab：长按</li>
+        <li>swipe：滑动</li>
+        <li>swipeUp/Down/Left/Right:四个方向</li>
+        <li>pinchin/Out放大缩小</li>
+        <li>
+            $('selector').tap(function(e){
+            //实现点击要做什么
+            //e：手指事件对象  this：当前操作的元素
+            )}
+        </li>
+        <li>4.zepto中的animate支持transform变型，jquery中不支持</li>
+        <li>
+            $('selector').animate({
+                top:100,
+                rotate:360deg,
+            }1000,linear,function(){
+            //回调函数，动画完成后触发
+            });
+        </li>
+        <li>html5中的audio</li>
+        <li>音频播放标签，通过它可以播放音频文件（支持格式：MP3、ogg、wav）</li>
+        <li>使用</li>
+        <li><audio src="xxx.mp3"></audio></li>
+        <li>
+            <audio>
+                <source src="xxx.mp3" type="audio/mpeg">
+                <source src="xxx.ogg" type="audio/ogg">
+                <source src="xxx.wav" type="audio/wav">
+                >你的浏览器不支持audio，请升级浏览器
+            </audio>
+        </li>
+        <li>audio内置属性</li>
+        <li>controls:是否使用内置的播放器，默认是不显示浏览器，加上这个属性显示</li>
+        <li>autoplay:自动播放，一般不用，在js里设置</li>
+        <li>preload:设置当前音频文件预先加载模式，默认值auto,代表开始加载页面的时候把音频文件进行加载，
+            metadata代表开始加载页面的时候就把音频文件进行基础的加载，主体音频需要播放后才开始加载，
+            none开始什么都不加载，都是等到播放后在开始加载（最常用）
+        </li>
+        <li>toop:播放完成后循环播放</li>
+        <li>swiper插件的使用</li>
+        <li>http://www.swiper.com.cn/（有详细介绍）</li>
+        <li>swiper其实是一个ui组件（也可以理解为js插件），目的就是解决移动端滑屏操作的，例如轮播图，屏幕滑动切换的场景应用等</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+</body>
+</html>
